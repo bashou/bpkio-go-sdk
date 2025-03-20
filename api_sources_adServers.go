@@ -7,20 +7,23 @@ import (
 )
 
 type AdServerInput struct {
-	Name        string `json:"name,omitempty"` //req
-	Url         string `json:"url,omitempty"`  //req
-	Description string `json:"description,omitempty"`
-	Queries     string `json:"queries,omitempty"`
-	Template    string `json:"template,omitempty"` //req
+	Name            string       `json:"name,omitempty"` //req
+	Url             string       `json:"url,omitempty"`  //req
+	Description     string       `json:"description,omitempty"`
+	Queries         string       `json:"queries,omitempty"`
+	QueryParameters []QueryParam `json:"queryParameters"`
+	Template        string       `json:"template,omitempty"` //req
 }
 
 type AdServerOutput struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Url         string `json:"url"`
-	Queries     string `json:"queries"`
-	Template    string `json:"template"`
-	Id          uint   `json:"id"`
+	Name            string       `json:"name"`
+	Description     string       `json:"description"`
+	Type            string       `json:"type"`
+	Url             string       `json:"url"`
+	Queries         string       `json:"queries"`
+	QueryParameters []QueryParam `json:"queryParameters"`
+	Template        string       `json:"template"`
+	Id              uint         `json:"id"`
 }
 
 func (client BroadpeakClient) CreateAdServer(options AdServerInput) (AdServerOutput, error) {

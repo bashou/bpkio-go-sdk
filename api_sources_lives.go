@@ -9,16 +9,21 @@ import (
 type LiveInput struct {
 	Name        string `json:"name,omitempty"` //req
 	Url         string `json:"url,omitempty"`  //req
-	Description string `json:"description,omitempty"`
 	BackupIp    string `json:"backupIp,omitempty"`
+	Description string `json:"description,omitempty"`
+	MultiPeriod bool   `json:"multiPeriod,omitempty"`
+	Origin      Origin `json:"origin"`
 }
 
 type LiveOutput struct {
 	Name        string `json:"name"`
-	Description string `json:"description"`
 	Url         string `json:"url"`
 	BackupIp    string `json:"backupIp"`
+	Description string `json:"description"`
+	MultiPeriod bool   `json:"multiPeriod"`
 	Format      string `json:"format"`
+	Type        string `json:"type"`
+	Origin      Origin `json:"origin"`
 	Id          uint   `json:"id"`
 }
 

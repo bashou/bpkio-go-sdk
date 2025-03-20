@@ -8,36 +8,50 @@ import (
 
 type CreateAdInsertionInput struct {
 	Name                 string                `json:"name,omitempty"` //required
-	EnvTags              []string              `json:"environmentTags,omitempty"`
+	Tags                 []string              `json:"tags,omitempty"`
 	LiveAdPreRoll        *LiveAdPreRoll        `json:"liveAdPreRoll,omitempty"`
 	LiveAdReplacement    *LiveAdReplacement    `json:"liveAdReplacement,omitempty"`
 	VodAdInsertion       *VodAdInsertion       `json:"vodAdInsertion,omitempty"`
 	TranscodingProfile   *Identifiable         `json:"transcodingProfile,omitempty"`
+	AdvancedOptions      *AdvancedOptions      `json:"advancedOptions,omitempty"`
 	EnableAdTranscoding  bool                  `json:"enableAdTranscoding,omitempty"`
 	ServerSideAdTracking *ServerSideAdTracking `json:"serverSideAdTracking,omitempty"`
 	Source               *Identifiable         `json:"source,omitempty"` //required
 }
 
 type UpdateAdInsertionInput struct {
-	Name                 string                `json:"name,omitempty"` //required
-	EnvTags              []string              `json:"environmentTags,omitempty"`
+	Name                 string                `json:"name,omitempty"`
+	Tags                 []string              `json:"tags,omitempty"`
 	LiveAdPreRoll        *LiveAdPreRoll        `json:"liveAdPreRoll,omitempty"`
 	LiveAdReplacement    *LiveAdReplacement    `json:"liveAdReplacement,omitempty"`
 	VodAdInsertion       *VodAdInsertion       `json:"vodAdInsertion,omitempty"`
 	TranscodingProfile   *Identifiable         `json:"transcodingProfile,omitempty"`
+	AdvancedOptions      *AdvancedOptions      `json:"advancedOptions,omitempty"`
 	EnableAdTranscoding  bool                  `json:"enableAdTranscoding,omitempty"`
 	ServerSideAdTracking *ServerSideAdTracking `json:"serverSideAdTracking,omitempty"`
+	Source               *Identifiable         `json:"source,omitempty"`
+}
+
+type AuthorizationHeader struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+type AdvancedOptions struct {
+	AuthorizationHeader AuthorizationHeader `json:"authorizationHeader,omitempty"`
 }
 
 type AdInsertionOutput struct {
 	Name                 string                  `json:"name,omitempty"`
-	EnvironmentTags      []string                `json:"environmentTags,omitempty"`
+	Tags                 []string                `json:"tags,omitempty"`
+	Type                 string                  `json:"type"`
+	State                string                  `json:"state"`
 	LiveAdPreRoll        LiveAdPreRollOutput     `json:"liveAdPreRoll"`
 	LiveAdReplacement    LiveAdReplacementOutput `json:"liveAdReplacement"`
 	VodAdInsertion       VodAdInsertionOutput    `json:"vodAdInsertion"`
 	TranscodingProfile   TranscodingProfile      `json:"transcodingProfile"`
 	EnableAdTranscoding  bool                    `json:"enableAdTranscoding"`
 	ServerSideAdTracking ServerSideAdTracking    `json:"serverSideAdTracking"`
+	AdvancedOptions      AdvancedOptions         `json:"advancedOptions"`
 	Source               Source                  `json:"source"`
 	Id                   uint                    `json:"id"`
 	CreationDate         string                  `json:"creationDate"`

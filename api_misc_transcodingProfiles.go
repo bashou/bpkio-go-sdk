@@ -1,12 +1,15 @@
 package broadpeakio
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type TranscodingProfileOutput struct {
-	Name       string `json:"name"`
-	Content    string `json:"content"`
-	Id         uint   `json:"id"`
-	InternalId string `json:"internalId"`
+	Name       string          `json:"name"`
+	Content    json.RawMessage `json:"content"`
+	Id         uint            `json:"id"`
+	InternalId string          `json:"internalId"`
 }
 
 func (client BroadpeakClient) GetAllTranscodingProfiles(offset uint, limit uint) ([]TranscodingProfileOutput, error) {

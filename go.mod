@@ -1,3 +1,3 @@
-module github.com/bashou/bpkio-go-sdk
+module broadpeakio
 
 go 1.23

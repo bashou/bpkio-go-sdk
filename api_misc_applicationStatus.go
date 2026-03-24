@@ -1,7 +1,7 @@
 package broadpeakio
 
 func (client BroadpeakClient) CheckApplicationStatus() (string, error) {
-	url := baseUrl + "status"
+	url := client.getBaseUrl() + "status"
 
 	resp, err := httpGetRequest(client, url)
 

@@ -6,9 +6,10 @@ import (
 )
 
 const apiKey = "TOKEN VALUE"
+const testEndpoint = "https://api.broadpeak.io"
 
 func TestAdInsertion(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var liveOptions = LiveInput{Name: "Test Ad", Url: "https://d1uz2gd9rhh5xg.cloudfront.net/out/v1/6e0f649095ca4131b16bd0f877048629/index.mpd?testgo"}
 
@@ -64,7 +65,7 @@ func TestAdInsertion(t *testing.T) {
 }
 
 func TestAdServer(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var options = AdServerInput{Name: "Test", Url: "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd"}
 
@@ -92,7 +93,7 @@ func TestAdServer(t *testing.T) {
 }
 
 func TestApiKey(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	timeVal := time.Now().UTC()
 
@@ -113,7 +114,7 @@ func TestApiKey(t *testing.T) {
 }
 
 func TestApplicationStatus(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	_, err := broadpeak.CheckApplicationStatus()
 	if err != nil {
@@ -122,7 +123,7 @@ func TestApplicationStatus(t *testing.T) {
 }
 
 func TestAssetCatalog(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var options = AssetCatalogInput{Name: "TestAC", Url: "http://ftp.itec.aau.at/datasets/DASHDataset2014/TearsOfSteel/2sec/", AssetSample: "TearsOfSteel_2s_simple_2014_05_09.mpd"}
 
@@ -152,7 +153,7 @@ func TestAssetCatalog(t *testing.T) {
 }
 
 func TestAssets(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var options = AssetInput{Name: "Test", Url: "https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd"}
 
@@ -182,7 +183,7 @@ func TestAssets(t *testing.T) {
 }
 
 func TestCategories(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var subcategories = []Subcategory{{Key: "xyz", Value: "abc"}}
 
@@ -216,7 +217,7 @@ func TestCategories(t *testing.T) {
 }
 
 func TestContentReplacement(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var optionsLive = LiveInput{Name: "TestLive", Url: "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"}
 
@@ -274,7 +275,7 @@ func TestContentReplacement(t *testing.T) {
 }
 
 func TestSlotsContentReplacement(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var optionsLive = LiveInput{Name: "TestLive", Url: "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"}
 
@@ -364,7 +365,7 @@ func TestSlotsContentReplacement(t *testing.T) {
 }
 
 func TestLive(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var options = LiveInput{Name: "Test", Url: "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"}
 
@@ -392,7 +393,7 @@ func TestLive(t *testing.T) {
 }
 
 func TestServices(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	_, err := broadpeak.GetAllServices(0, 5)
 	if err != nil {
@@ -401,7 +402,7 @@ func TestServices(t *testing.T) {
 }
 
 func TestSlate(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var options = SlateInput{Name: "Test", Url: "https://rachittestbroadpeak.s3.amazonaws.com/localisejs+spanish+conversion.jpg"}
 
@@ -430,7 +431,7 @@ func TestSlate(t *testing.T) {
 }
 
 func TestSources(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	_, err := broadpeak.GetAllSources(0, 0)
 	if err != nil {
@@ -443,7 +444,7 @@ func TestSources(t *testing.T) {
 }
 
 func TestTranscodingProfiles(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	listProfiles, err := broadpeak.GetAllTranscodingProfiles(0, 1)
 	if err != nil {
@@ -457,43 +458,8 @@ func TestTranscodingProfiles(t *testing.T) {
 	}
 }
 
-/*func TestUsers(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
-
-	var options = UserInput{FirstName: "Test", LastName: "Name", Email: "test1@test.com"}
-
-	createUserResponse, err := broadpeak.CreateUser(options)
-
-	if err != nil {
-		t.Errorf("CreateUser failed with error:%v", err)
-	}
-
-	id := createUserResponse.Id
-
-	_, err = broadpeak.GetAllUsers(0, 0, true)
-	if err != nil {
-		t.Errorf("GetAllUsers failed with error:%v", err)
-	}
-
-	userDetails, err := broadpeak.GetUser(uint(id))
-	if err != nil {
-		t.Errorf("GetUser failed with error:%v", err)
-	}
-
-	updateOptions := UserInput{FirstName: userDetails.FirstName, LastName: "NewLastName", Email: "test@test.com"}
-	_, err = broadpeak.UpdateUser(uint(id), updateOptions)
-	if err != nil {
-		t.Errorf("UpdateUser failed with error:%v", err)
-	}
-
-	_, err = broadpeak.DeleteUser(uint(id))
-	if err != nil {
-		t.Errorf("DeleteUser failed with error:%v", err)
-	}
-}*/
-
 func TestVirtualChannel(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var optionsLive = LiveInput{Name: "Test", Url: "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"}
 
@@ -536,7 +502,7 @@ func TestVirtualChannel(t *testing.T) {
 }
 
 func TestSlotsVirtualChannel(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	var optionsLive = LiveInput{Name: "Test", Url: "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"}
 
@@ -625,7 +591,7 @@ func TestSlotsVirtualChannel(t *testing.T) {
 }
 
 func TestConsumption(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	layout := "2006-01-02T15:04:05Z"
 	currentTime := time.Now().UTC()
@@ -643,11 +609,10 @@ func TestConsumption(t *testing.T) {
 }
 
 func TestSamples(t *testing.T) {
-	broadpeak := MakeClient(apiKey)
+	broadpeak := MakeClient(apiKey, testEndpoint)
 
 	_, err := broadpeak.CreateSamples()
 	if err != nil {
 		t.Errorf("CreateSamples failed with error:%v", err)
 	}
-
 }

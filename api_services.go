@@ -12,7 +12,7 @@ type ServiceOutput struct {
 }
 
 func (client BroadpeakClient) GetAllServices(offset uint, limit uint) ([]ServiceOutput, error) {
-	url := baseUrl + "services"
+	url := client.getBaseUrl() + "services"
 	url = addOffsetUrl(url, offset, limit)
 	resp, err := httpGetRequest(client, url)
 

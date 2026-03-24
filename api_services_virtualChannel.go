@@ -40,7 +40,7 @@ type VirtualChannelOutput struct {
 }
 
 func (client BroadpeakClient) CreateVirtualChannel(options CreateVirtualChannelInput) (VirtualChannelOutput, error) {
-	url := baseUrl + "services/virtual-channel"
+	url := client.getBaseUrl() + "services/virtual-channel"
 
 	requiredFields := []string{"Name", "BaseLive"}
 
@@ -71,7 +71,7 @@ func (client BroadpeakClient) CreateVirtualChannel(options CreateVirtualChannelI
 }
 
 func (client BroadpeakClient) GetVirtualChannel(id uint) (VirtualChannelOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/virtual-channel/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d", id)
 
 	resp, err := httpGetRequest(client, url)
 
@@ -90,7 +90,7 @@ func (client BroadpeakClient) GetVirtualChannel(id uint) (VirtualChannelOutput, 
 }
 
 func (client BroadpeakClient) UpdateVirtualChannel(id uint, options UpdateVirtualChannelInput) (VirtualChannelOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/virtual-channel/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d", id)
 
 	requiredFields := []string{"Name"}
 
@@ -120,7 +120,7 @@ func (client BroadpeakClient) UpdateVirtualChannel(id uint, options UpdateVirtua
 }
 
 func (client BroadpeakClient) DeleteVirtualChannel(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"services/virtual-channel/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d", id)
 
 	resp, err := httpDeleteRequest(client, url)
 

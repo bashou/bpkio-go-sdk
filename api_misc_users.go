@@ -24,7 +24,7 @@ type UserOutput struct {
 }
 
 func (client BroadpeakClient) CreateUser(options UserInput) (UserOutput, error) {
-	url := baseUrl + "users"
+	url := client.getBaseUrl() + "users"
 
 	requiredFields := []string{"FistName", "LastName", "Email"}
 
@@ -54,7 +54,7 @@ func (client BroadpeakClient) CreateUser(options UserInput) (UserOutput, error) 
 }
 
 func (client BroadpeakClient) GetAllUsers(offset uint, limit uint, withEmailStatus bool) ([]UserOutput, error) {
-	url := baseUrl + "users"
+	url := client.getBaseUrl() + "users"
 	questionMark := '?'
 
 	url = addOffsetUrl(url, offset, limit)
@@ -82,7 +82,7 @@ func (client BroadpeakClient) GetAllUsers(offset uint, limit uint, withEmailStat
 }
 
 func (client BroadpeakClient) GetUser(id uint) (UserOutput, error) {
-	url := fmt.Sprintf(baseUrl+"users/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"users/%d", id)
 
 	resp, err := httpGetRequest(client, url)
 
@@ -101,7 +101,7 @@ func (client BroadpeakClient) GetUser(id uint) (UserOutput, error) {
 }
 
 func (client BroadpeakClient) UpdateUser(id uint, options UserInput) (UserOutput, error) {
-	url := fmt.Sprintf(baseUrl+"users/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"users/%d", id)
 
 	jsonBody, _ := json.Marshal(options)
 
@@ -122,7 +122,7 @@ func (client BroadpeakClient) UpdateUser(id uint, options UserInput) (UserOutput
 }
 
 func (client BroadpeakClient) DeleteUser(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"users/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"users/%d", id)
 
 	resp, err := httpDeleteRequest(client, url)
 

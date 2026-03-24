@@ -31,7 +31,7 @@ type ContentReplacementOutput struct {
 }
 
 func (client BroadpeakClient) CreateContentReplacement(options CreateContentReplacementInput) (ContentReplacementOutput, error) {
-	url := baseUrl + "services/content-replacement"
+	url := client.getBaseUrl() + "services/content-replacement"
 	requiredFields := []string{"Name", "Replacement", "Source"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -61,7 +61,7 @@ func (client BroadpeakClient) CreateContentReplacement(options CreateContentRepl
 }
 
 func (client BroadpeakClient) GetContentReplacement(id uint) (ContentReplacementOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/content-replacement/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d", id)
 
 	resp, err := httpGetRequest(client, url)
 
@@ -80,7 +80,7 @@ func (client BroadpeakClient) GetContentReplacement(id uint) (ContentReplacement
 }
 
 func (client BroadpeakClient) UpdateContentReplacement(id uint, options UpdateContentReplacementInput) (ContentReplacementOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/content-replacement/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d", id)
 
 	requiredFields := []string{"Name", "Replacement"}
 
@@ -111,7 +111,7 @@ func (client BroadpeakClient) UpdateContentReplacement(id uint, options UpdateCo
 }
 
 func (client BroadpeakClient) DeleteContentReplacement(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"services/content-replacement/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d", id)
 
 	resp, err := httpDeleteRequest(client, url)
 

@@ -16,7 +16,7 @@ type SourceStatusOutput struct {
 }
 
 func (client BroadpeakClient) GetAllSources(offset uint, limit uint) ([]SourceOutput, error) {
-	url := baseUrl + "sources"
+	url := client.getBaseUrl() + "sources"
 	url = addOffsetUrl(url, offset, limit)
 	resp, err := httpGetRequest(client, url)
 
@@ -34,7 +34,7 @@ func (client BroadpeakClient) GetAllSources(offset uint, limit uint) ([]SourceOu
 }
 
 func (client BroadpeakClient) CheckSourceStatus(sourceType string, sourceUrl string) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/%s/check?url=%s", sourceType, sourceUrl)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/%s/check?url=%s", sourceType, sourceUrl)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {

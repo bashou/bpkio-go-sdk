@@ -1,7 +1,12 @@
 package broadpeakio
 
+import (
+	"fmt"
+)
+
 type BroadpeakClient struct {
-	apiKey string
+	apiKey   string
+	Endpoint string
 }
 
 type Identifiable struct {
@@ -14,7 +19,18 @@ type ApiResponseOutput struct {
 	Error      string `json:"error"`
 }
 
-func MakeClient(apiKey string) BroadpeakClient {
-	client := BroadpeakClient{apiKey}
+func MakeClient(apiKey string, endpoint string) BroadpeakClient {
+	// default value if it is not set
+	if endpoint == "" {
+		endpoint = "https://api.broadpeak.io"
+	}
+	client := BroadpeakClient{
+		apiKey:   apiKey,
+		Endpoint: endpoint,
+	}
 	return client
+}
+
+func (c *BroadpeakClient) getBaseUrl() string {
+	return fmt.Sprintf("%s/v1/", c.Endpoint)
 }

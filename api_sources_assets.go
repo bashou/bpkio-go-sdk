@@ -23,7 +23,7 @@ type AssetOutput struct {
 }
 
 func (client BroadpeakClient) CreateAsset(options AssetInput) (AssetOutput, error) {
-	url := baseUrl + "sources/asset"
+	url := client.getBaseUrl() + "sources/asset"
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -53,7 +53,7 @@ func (client BroadpeakClient) CreateAsset(options AssetInput) (AssetOutput, erro
 }
 
 func (client BroadpeakClient) GetAsset(id uint) (AssetOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -71,7 +71,7 @@ func (client BroadpeakClient) GetAsset(id uint) (AssetOutput, error) {
 }
 
 func (client BroadpeakClient) UpdateAsset(id uint, options AssetInput) (AssetOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset/%d", id)
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -101,7 +101,7 @@ func (client BroadpeakClient) UpdateAsset(id uint, options AssetInput) (AssetOut
 }
 
 func (client BroadpeakClient) DeleteAsset(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {

@@ -18,7 +18,7 @@ type ApiKeyOutput struct {
 }
 
 func (client BroadpeakClient) CreateApiKey(name string, expirationDate string) (ApiKeyOutput, error) {
-	url := baseUrl + "tokens"
+	url := client.getBaseUrl() + "tokens"
 
 	body := CreateApiKeyInput{name, expirationDate}
 
@@ -41,7 +41,7 @@ func (client BroadpeakClient) CreateApiKey(name string, expirationDate string) (
 }
 
 func (client BroadpeakClient) GetAllApiKeys(offset uint, limit uint) ([]ApiKeyOutput, error) {
-	url := baseUrl + "tokens"
+	url := client.getBaseUrl() + "tokens"
 
 	url = addOffsetUrl(url, offset, limit)
 
@@ -62,7 +62,7 @@ func (client BroadpeakClient) GetAllApiKeys(offset uint, limit uint) ([]ApiKeyOu
 }
 
 func (client BroadpeakClient) DeleteApiKey(name string) (string, error) {
-	url := fmt.Sprintf(baseUrl+"tokens/%s", name)
+	url := fmt.Sprintf(client.getBaseUrl()+"tokens/%s", name)
 
 	resp, err := httpDeleteRequest(client, url)
 

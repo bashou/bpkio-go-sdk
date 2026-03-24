@@ -27,7 +27,7 @@ type AdServerOutput struct {
 }
 
 func (client BroadpeakClient) CreateAdServer(options AdServerInput) (AdServerOutput, error) {
-	url := baseUrl + "sources/ad-server"
+	url := client.getBaseUrl() + "sources/ad-server"
 
 	requiredFields := []string{"Name", "Url"}
 
@@ -57,7 +57,7 @@ func (client BroadpeakClient) CreateAdServer(options AdServerInput) (AdServerOut
 }
 
 func (client BroadpeakClient) GetAdServer(id uint) (AdServerOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/ad-server/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/ad-server/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -74,7 +74,7 @@ func (client BroadpeakClient) GetAdServer(id uint) (AdServerOutput, error) {
 }
 
 func (client BroadpeakClient) UpdateAdServer(id uint, options AdServerInput) (AdServerOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/ad-server/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/ad-server/%d", id)
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -103,7 +103,7 @@ func (client BroadpeakClient) UpdateAdServer(id uint, options AdServerInput) (Ad
 }
 
 func (client BroadpeakClient) DeleteAdServer(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/ad-server/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/ad-server/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {

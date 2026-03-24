@@ -28,7 +28,7 @@ type LiveOutput struct {
 }
 
 func (client BroadpeakClient) CreateLive(options LiveInput) (LiveOutput, error) {
-	url := baseUrl + "sources/live"
+	url := client.getBaseUrl() + "sources/live"
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -55,7 +55,7 @@ func (client BroadpeakClient) CreateLive(options LiveInput) (LiveOutput, error) 
 }
 
 func (client BroadpeakClient) GetLive(id uint) (LiveOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/live/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/live/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -71,7 +71,7 @@ func (client BroadpeakClient) GetLive(id uint) (LiveOutput, error) {
 }
 
 func (client BroadpeakClient) UpdateLive(id uint, options LiveInput) (LiveOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/live/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/live/%d", id)
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -99,7 +99,7 @@ func (client BroadpeakClient) UpdateLive(id uint, options LiveInput) (LiveOutput
 }
 
 func (client BroadpeakClient) DeleteLive(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/live/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/live/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {

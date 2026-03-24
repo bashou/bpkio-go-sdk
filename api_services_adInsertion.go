@@ -60,7 +60,7 @@ type AdInsertionOutput struct {
 }
 
 func (client BroadpeakClient) CreateAdInsertion(options CreateAdInsertionInput) (AdInsertionOutput, error) {
-	url := baseUrl + "services/ad-insertion"
+	url := client.getBaseUrl() + "services/ad-insertion"
 
 	requiredFields := []string{"Name", "Source"}
 
@@ -90,7 +90,7 @@ func (client BroadpeakClient) CreateAdInsertion(options CreateAdInsertionInput) 
 }
 
 func (client BroadpeakClient) GetAdInsertion(id uint) (AdInsertionOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/ad-insertion/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/ad-insertion/%d", id)
 
 	resp, err := httpGetRequest(client, url)
 
@@ -109,7 +109,7 @@ func (client BroadpeakClient) GetAdInsertion(id uint) (AdInsertionOutput, error)
 }
 
 func (client BroadpeakClient) UpdateAdInsertion(id uint, options UpdateAdInsertionInput) (AdInsertionOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/ad-insertion/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/ad-insertion/%d", id)
 
 	requiredFields := []string{"Name"}
 
@@ -139,7 +139,7 @@ func (client BroadpeakClient) UpdateAdInsertion(id uint, options UpdateAdInserti
 }
 
 func (client BroadpeakClient) DeleteAdInsertion(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"services/ad-insertion/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/ad-insertion/%d", id)
 
 	resp, err := httpDeleteRequest(client, url)
 

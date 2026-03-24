@@ -11,7 +11,7 @@ type SamplesOutput struct {
 }
 
 func (client BroadpeakClient) CreateSamples() ([]SamplesOutput, error) {
-	url := baseUrl + "samples"
+	url := client.getBaseUrl() + "samples"
 
 	resp, err := httpPostRequest(client, url, "")
 

@@ -22,7 +22,7 @@ type CategoryOutput struct {
 }
 
 func (client BroadpeakClient) CreateCategory(name string, subcategories []Subcategory) (CategoryOutput, error) {
-	url := baseUrl + "categories"
+	url := client.getBaseUrl() + "categories"
 	newCategory := Category{name, subcategories}
 
 	newCategoryJson, _ := json.Marshal(newCategory)
@@ -45,7 +45,7 @@ func (client BroadpeakClient) CreateCategory(name string, subcategories []Subcat
 }
 
 func (client BroadpeakClient) GetAllCategories(offset uint, limit uint) ([]CategoryOutput, error) {
-	url := baseUrl + "categories"
+	url := client.getBaseUrl() + "categories"
 	url = addOffsetUrl(url, offset, limit)
 	resp, err := httpGetRequest(client, url)
 
@@ -64,7 +64,7 @@ func (client BroadpeakClient) GetAllCategories(offset uint, limit uint) ([]Categ
 }
 
 func (client BroadpeakClient) GetCategory(id uint) (CategoryOutput, error) {
-	url := fmt.Sprintf(baseUrl+"categories/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"categories/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -82,7 +82,7 @@ func (client BroadpeakClient) GetCategory(id uint) (CategoryOutput, error) {
 }
 
 func (client BroadpeakClient) DeleteCategory(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"categories/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"categories/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {
@@ -92,7 +92,7 @@ func (client BroadpeakClient) DeleteCategory(id uint) (string, error) {
 }
 
 func (client BroadpeakClient) UpdateCategory(id uint, name string, subcategories []Subcategory) (CategoryOutput, error) {
-	url := fmt.Sprintf(baseUrl+"categories/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"categories/%d", id)
 	newCategory := Category{name, subcategories}
 
 	newCategoryJson, _ := json.Marshal(newCategory)

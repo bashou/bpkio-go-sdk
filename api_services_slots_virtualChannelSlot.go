@@ -38,7 +38,7 @@ type VirtualChannelSlotOutput struct {
 }
 
 func (client BroadpeakClient) CreateVirtualChannelSlot(serviceId uint, options CreateVirtualChannelSlotInput) (VirtualChannelSlotOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/virtual-channel/%d/slots", serviceId)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d/slots", serviceId)
 
 	requiredFields := []string{"StartTime"}
 
@@ -68,7 +68,7 @@ func (client BroadpeakClient) CreateVirtualChannelSlot(serviceId uint, options C
 }
 
 func (client BroadpeakClient) GetAllVirtualChannelSlots(serviceId uint, options GetAllSlotsInput) ([]VirtualChannelSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/virtual-channel/%d/slots", serviceId)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d/slots", serviceId)
 
 	reqUrl, err := getReqUrlWithQuery(apiUrl, structToMap(options))
 
@@ -93,7 +93,7 @@ func (client BroadpeakClient) GetAllVirtualChannelSlots(serviceId uint, options 
 }
 
 func (client BroadpeakClient) GetVirtualChannelSlot(serviceId uint, id uint) (VirtualChannelSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/virtual-channel/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d/slots/%d", serviceId, id)
 
 	resp, err := httpGetRequest(client, apiUrl)
 
@@ -112,7 +112,7 @@ func (client BroadpeakClient) GetVirtualChannelSlot(serviceId uint, id uint) (Vi
 }
 
 func (client BroadpeakClient) UpdateVirtualChannelSlot(serviceId uint, id uint, options UpdateVirtualChannelSlotInput) (VirtualChannelSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/virtual-channel/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d/slots/%d", serviceId, id)
 
 	requiredFields := []string{"StartTime"}
 
@@ -142,7 +142,7 @@ func (client BroadpeakClient) UpdateVirtualChannelSlot(serviceId uint, id uint, 
 }
 
 func (client BroadpeakClient) DeleteVirtualChannelSlot(serviceId uint, id uint) (string, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/virtual-channel/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/virtual-channel/%d/slots/%d", serviceId, id)
 
 	resp, err := httpDeleteRequest(client, apiUrl)
 

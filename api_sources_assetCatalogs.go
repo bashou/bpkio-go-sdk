@@ -24,7 +24,7 @@ type AssetCatalogInput struct {
 }
 
 func (client BroadpeakClient) CreateAssetCatalog(options AssetCatalogInput) (AssetCatalogOutput, error) {
-	url := baseUrl + "sources/asset-catalog"
+	url := client.getBaseUrl() + "sources/asset-catalog"
 
 	requiredFields := []string{"Name", "Url", "AssetSample"}
 
@@ -54,7 +54,7 @@ func (client BroadpeakClient) CreateAssetCatalog(options AssetCatalogInput) (Ass
 }
 
 func (client BroadpeakClient) GetAssetCatalog(id uint) (AssetCatalogOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset-catalog/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset-catalog/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -72,7 +72,7 @@ func (client BroadpeakClient) GetAssetCatalog(id uint) (AssetCatalogOutput, erro
 }
 
 func (client BroadpeakClient) UpdateAssetCatalog(id uint, options AssetCatalogInput) (AssetCatalogOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset-catalog/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset-catalog/%d", id)
 
 	requiredFields := []string{"Name", "Url", "AssetSample"}
 
@@ -102,7 +102,7 @@ func (client BroadpeakClient) UpdateAssetCatalog(id uint, options AssetCatalogIn
 }
 
 func (client BroadpeakClient) DeleteAssetCatalog(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/asset-catalog/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/asset-catalog/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {

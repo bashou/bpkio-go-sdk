@@ -34,7 +34,7 @@ type ContentReplacementSlotOutput struct {
 }
 
 func (client BroadpeakClient) CreateContentReplacementSlot(serviceId uint, options CreateContentReplacementSlotInput) (ContentReplacementSlotOutput, error) {
-	url := fmt.Sprintf(baseUrl+"services/content-replacement/%d/slots", serviceId)
+	url := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d/slots", serviceId)
 
 	requiredFields := []string{"StartTime"}
 
@@ -64,7 +64,7 @@ func (client BroadpeakClient) CreateContentReplacementSlot(serviceId uint, optio
 }
 
 func (client BroadpeakClient) GetAllContentReplacementSlots(serviceId uint, options GetAllSlotsInput) ([]ContentReplacementSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/content-replacement/%d/slots", serviceId)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d/slots", serviceId)
 
 	reqUrl, err := getReqUrlWithQuery(apiUrl, structToMap(options))
 
@@ -89,7 +89,7 @@ func (client BroadpeakClient) GetAllContentReplacementSlots(serviceId uint, opti
 }
 
 func (client BroadpeakClient) GetContentReplacementSlot(serviceId uint, id uint) (ContentReplacementSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/content-replacement/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d/slots/%d", serviceId, id)
 
 	resp, err := httpGetRequest(client, apiUrl)
 
@@ -108,7 +108,7 @@ func (client BroadpeakClient) GetContentReplacementSlot(serviceId uint, id uint)
 }
 
 func (client BroadpeakClient) UpdateContentReplacementSlot(serviceId uint, id uint, options UpdateContentReplacementSlotInput) (ContentReplacementSlotOutput, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/content-replacement/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d/slots/%d", serviceId, id)
 
 	requiredFields := []string{"StartTime"}
 
@@ -138,7 +138,7 @@ func (client BroadpeakClient) UpdateContentReplacementSlot(serviceId uint, id ui
 }
 
 func (client BroadpeakClient) DeleteContentReplacementSlot(serviceId uint, id uint) (string, error) {
-	apiUrl := fmt.Sprintf(baseUrl+"services/content-replacement/%d/slots/%d", serviceId, id)
+	apiUrl := fmt.Sprintf(client.getBaseUrl()+"services/content-replacement/%d/slots/%d", serviceId, id)
 
 	resp, err := httpDeleteRequest(client, apiUrl)
 

@@ -13,7 +13,7 @@ type TranscodingProfileOutput struct {
 }
 
 func (client BroadpeakClient) GetAllTranscodingProfiles(offset uint, limit uint) ([]TranscodingProfileOutput, error) {
-	url := baseUrl + "transcoding-profiles"
+	url := client.getBaseUrl() + "transcoding-profiles"
 
 	url = addOffsetUrl(url, offset, limit)
 
@@ -34,7 +34,7 @@ func (client BroadpeakClient) GetAllTranscodingProfiles(offset uint, limit uint)
 }
 
 func (client BroadpeakClient) GetTranscodingProfile(id uint) (TranscodingProfileOutput, error) {
-	url := fmt.Sprintf(baseUrl+"transcoding-profiles/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"transcoding-profiles/%d", id)
 
 	resp, err := httpGetRequest(client, url)
 

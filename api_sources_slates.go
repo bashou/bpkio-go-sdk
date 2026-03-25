@@ -22,7 +22,7 @@ type SlateOutput struct {
 }
 
 func (client BroadpeakClient) CreateSlate(options SlateInput) (SlateOutput, error) {
-	url := baseUrl + "sources/slate"
+	url := client.getBaseUrl() + "sources/slate"
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -51,7 +51,7 @@ func (client BroadpeakClient) CreateSlate(options SlateInput) (SlateOutput, erro
 }
 
 func (client BroadpeakClient) GetSlate(id uint) (SlateOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/slate/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/slate/%d", id)
 	resp, err := httpGetRequest(client, url)
 
 	if err != nil {
@@ -68,7 +68,7 @@ func (client BroadpeakClient) GetSlate(id uint) (SlateOutput, error) {
 }
 
 func (client BroadpeakClient) UpdateSlate(id uint, options SlateInput) (SlateOutput, error) {
-	url := fmt.Sprintf(baseUrl+"sources/slate/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/slate/%d", id)
 	requiredFields := []string{"Name", "Url"}
 
 	isOk, missingField := checkRequiredFieldsNonEmpty(options, requiredFields)
@@ -97,7 +97,7 @@ func (client BroadpeakClient) UpdateSlate(id uint, options SlateInput) (SlateOut
 }
 
 func (client BroadpeakClient) DeleteSlate(id uint) (string, error) {
-	url := fmt.Sprintf(baseUrl+"sources/slate/%d", id)
+	url := fmt.Sprintf(client.getBaseUrl()+"sources/slate/%d", id)
 	resp, err := httpDeleteRequest(client, url)
 
 	if err != nil {

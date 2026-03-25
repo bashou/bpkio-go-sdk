@@ -17,7 +17,7 @@ type AggregateConsumptionInput struct {
 }
 
 func (client BroadpeakClient) GetAggregateConsumption(options AggregateConsumptionInput) (AggregateConsumptionOutput, error) {
-	url := baseUrl + "consumption"
+	url := client.getBaseUrl() + "consumption"
 
 	resp, err := httpGetRequest(client, url)
 

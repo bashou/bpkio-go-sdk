@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const baseUrl = "https://api.broadpeak.io/v1/"
-
 func makeFirstCharLower(s string) string {
 	if len(s) == 0 {
 		return s // Return empty string if input is empty
